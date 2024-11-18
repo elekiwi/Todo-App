@@ -3,6 +3,10 @@ package com.elekiwi.todobleta.core.di
 import android.app.Application
 import androidx.room.Room
 import com.elekiwi.todobleta.core.data.local.TodoDatabase
+import com.elekiwi.todobleta.core.data.repository.TodoRepositoryImpl
+import com.elekiwi.todobleta.core.domain.repository.TodoRepository
+import com.elekiwi.todobleta.todo_list.domain.use_case.DeleteTodo
+import com.elekiwi.todobleta.todo_list.domain.use_case.GetAllTodos
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,5 +25,23 @@ object AppModule {
             TodoDatabase::class.java,
             "todos_db.db"
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideTodoRepository(db: TodoDatabase): TodoRepository {
+        return TodoRepositoryImpl(db)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAllNotesUseCase(todoRepository: TodoRepository): GetAllTodos {
+        return GetAllTodos(todoRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteTodoUseCase(todoRepository: TodoRepository): DeleteTodo {
+        return DeleteTodo(todoRepository)
     }
 }
