@@ -1,4 +1,4 @@
-package com.elekiwi.todobleta.ui.theme
+package com.elekiwi.todobleta.core.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
