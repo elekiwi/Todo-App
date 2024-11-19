@@ -9,7 +9,7 @@ TodoApp is a task management application that allows users to create, update, de
 * Delete tasks
 * Mark tasks as completed
 
-## Instalation
+## Installation
 
 1. Clone this repository:
 `git clone https://github.com/elekiwi/Todo-App.git`
