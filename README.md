@@ -36,8 +36,12 @@ presentation: Contains the application screens and their respective ViewModels.
 ## Tech stack
 
 Dagger-Hilt for dependency injection.
+
 RoomDB for persistence.
+
 Flows and Coroutines for reactive and asyncronous programming.
+
 Git for version control.
+
 Unit testing with JUnit.
 
