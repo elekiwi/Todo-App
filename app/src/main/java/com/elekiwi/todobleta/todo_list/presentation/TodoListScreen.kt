@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Checkbox
@@ -232,7 +231,7 @@ private fun TodoListItem(
                 .clickable { onDelete() },
             imageVector = Icons.Default.Clear,
             contentDescription = TestTags.DELETE_TODO + todoItem.title,
-            tint = MaterialTheme.colorScheme.onPrimary,
+            tint = Color.Black,
         )
     }
 }

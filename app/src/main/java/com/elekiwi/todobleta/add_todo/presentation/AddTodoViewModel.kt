@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -47,8 +48,13 @@ class AddTodoViewModel @Inject constructor(
                         isDone = _addTodoState.value.isDone
                     )
 
-                    _todoSavedChannel.send(isSaved)
+                    withContext(Dispatchers.Main){
+                        _todoSavedChannel.send(isSaved)
+
+                    }
+
                 }
+
             }
 
             is AddTodoActions.LoadTodo -> {
