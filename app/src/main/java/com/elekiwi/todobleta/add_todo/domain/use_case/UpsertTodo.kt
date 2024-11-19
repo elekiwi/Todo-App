@@ -8,6 +8,7 @@ class UpsertTodo(
 ) {
 
     suspend operator fun invoke(
+        id: Int,
         title: String,
         description: String,
         isDone: Boolean
@@ -16,7 +17,7 @@ class UpsertTodo(
             return false
         }
 
-        val todo = TodoItem(title, description, isDone)
+        val todo = TodoItem(title, description, isDone, id)
         todoRepository.upsertTodo(todo)
 
         return true

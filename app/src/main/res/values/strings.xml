@@ -2,5 +2,7 @@
     <string name="app_name">TodoBleta</string>
     <string name="add_a_task">Add a task</string>
     <string name="tasks">%1$s Tasks</string>
-
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
 </resources>

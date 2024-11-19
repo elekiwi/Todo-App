@@ -8,6 +8,7 @@ import com.elekiwi.todobleta.todo_list.domain.use_case.GetAllTodos
 import com.elekiwi.todobleta.todo_list.domain.use_case.UpdateTodo
 import com.elekiwi.todobleta.todo_list.presentation.TodoUiState.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -28,14 +29,14 @@ class TodoListViewModel @Inject constructor(
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), Loading)
 
     fun deleteTodo(todoItem: TodoItem) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             deleteTodo.invoke(todoItem)
 
         }
     }
 
     fun onCheckboxSelected(todoItem: TodoItem) {
-       viewModelScope.launch {
+       viewModelScope.launch(Dispatchers.IO) {
             updateTodo.invoke(todoItem.copy(isDone = !todoItem.isDone))
         }
     }

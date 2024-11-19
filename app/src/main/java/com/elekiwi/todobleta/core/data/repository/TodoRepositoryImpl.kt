@@ -1,6 +1,7 @@
 package com.elekiwi.todobleta.core.data.repository
 
 import com.elekiwi.todobleta.core.data.local.TodoDatabase
+import com.elekiwi.todobleta.core.data.mapper.toEditedTodoEntity
 import com.elekiwi.todobleta.core.data.mapper.toTodoEntityForDelete
 import com.elekiwi.todobleta.core.data.mapper.toTodoEntityForInsert
 import com.elekiwi.todobleta.core.data.mapper.toTodoItem
@@ -16,8 +17,13 @@ class TodoRepositoryImpl(
     private val todoDao = todoDb.todoDao
 
     override suspend fun upsertTodo(todoItem: TodoItem) {
-        todoDao.upsertTodo(todoItem.toTodoEntityForInsert())
+        if (todoItem.id == -1){
+            todoDao.upsertTodo(todoItem.toTodoEntityForInsert())
+        } else{
+            todoDao.upsertTodo(todoItem.toEditedTodoEntity())
+        }
     }
+
 
     override suspend fun deleteTodo(todoItem: TodoItem) {
        todoDao.deleteTodo(todoItem.toTodoEntityForDelete())

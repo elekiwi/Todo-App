@@ -6,5 +6,5 @@ sealed interface Screen {
     @Serializable
     data object TodoList: Screen
     @Serializable
-    data object AddTodo: Screen
+    data class AddTodo(val todoId: Int = -1): Screen
 }

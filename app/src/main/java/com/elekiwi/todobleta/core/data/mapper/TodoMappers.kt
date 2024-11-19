@@ -10,6 +10,13 @@ fun TodoItem.toTodoEntityForInsert(): TodoEntity {
         isDone = isDone
     )
 }
+fun TodoItem.toEditedTodoEntity(): TodoEntity = TodoEntity(
+    id = id,
+    title = title,
+    description = description,
+    isDone = isDone
+)
+
 
 fun TodoItem.toTodoEntityForDelete(): TodoEntity {
     return TodoEntity(

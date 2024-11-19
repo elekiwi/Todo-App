@@ -1,5 +1,6 @@
 package com.elekiwi.todobleta.todo_list.presentation
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -35,6 +36,7 @@ import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -56,6 +58,7 @@ import com.elekiwi.todobleta.core.presentation.util.TestTags
 
 fun TodoListScreen(
     onNavigateToAddTodo: () -> Unit,
+    onEditClick: (Int) -> Unit,
     viewModel: TodoListViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -82,6 +85,7 @@ fun TodoListScreen(
         is TodoUiState.Success -> {
             ScaffoldView(
                 onNavigateToAddNote = onNavigateToAddTodo,
+                onEditClick = { onEditClick(it) },
                 viewModel = viewModel,
                 todos = (uiState as TodoUiState.Success).todos
             )
@@ -92,6 +96,7 @@ fun TodoListScreen(
 @Composable
 private fun ScaffoldView(
     onNavigateToAddNote: () -> Unit,
+    onEditClick: (Int) -> Unit,
     viewModel: TodoListViewModel,
     todos: List<TodoItem>
 ) {
@@ -143,6 +148,9 @@ private fun ScaffoldView(
                     onDelete = {
                         viewModel.deleteTodo(todos[index])
                     },
+                    onEditClick = {
+                        onEditClick(it)
+                    },
                     onCheckedChange = {
                         viewModel.onCheckboxSelected(todos[index])
                     },
@@ -158,6 +166,7 @@ private fun ScaffoldView(
 @Composable
 private fun TodoListItem(
     onDelete: () -> Unit,
+    onEditClick: (Int) -> Unit,
     onCheckedChange: () -> Unit,
     todoItem: TodoItem,
     modifier: Modifier = Modifier
@@ -168,8 +177,12 @@ private fun TodoListItem(
             .height(150.dp)
             .padding(horizontal = 8.dp)
             .clip(RoundedCornerShape(20.dp))
-            .border(BorderStroke(2.dp, MaterialTheme.colorScheme.primary), RoundedCornerShape(20.dp))
+            .border(
+                BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
+                RoundedCornerShape(20.dp)
+            )
             .padding(8.dp)
+            .clickable { onEditClick(todoItem.id) }
     ) {
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -190,7 +203,7 @@ private fun TodoListItem(
 
                 Text(
                     text = todoItem.title,
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = Color.Black,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 19.sp,
                     maxLines = 2,
@@ -201,7 +214,7 @@ private fun TodoListItem(
 
                 Text(
                     text = todoItem.description,
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = Color.Black,
                     fontSize = 15.sp,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
@@ -224,8 +237,3 @@ private fun TodoListItem(
     }
 }
 
-@Preview
-@Composable
-private fun TodoListScreenPreview() {
-
-}
