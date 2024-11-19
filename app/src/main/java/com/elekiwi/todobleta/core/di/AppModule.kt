@@ -2,6 +2,7 @@ package com.elekiwi.todobleta.core.di
 
 import android.app.Application
 import androidx.room.Room
+import com.elekiwi.todobleta.add_todo.domain.use_case.UpsertTodo
 import com.elekiwi.todobleta.core.data.local.TodoDatabase
 import com.elekiwi.todobleta.core.data.repository.TodoRepositoryImpl
 import com.elekiwi.todobleta.core.domain.repository.TodoRepository
@@ -50,5 +51,11 @@ object AppModule {
     @Singleton
     fun provideUpdaTodoUseCase(todoRepository: TodoRepository): UpdateTodo {
         return UpdateTodo(todoRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpsertNoteUseCase(todoRepository: TodoRepository): UpsertTodo {
+        return UpsertTodo(todoRepository)
     }
 }
