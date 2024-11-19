@@ -7,6 +7,7 @@ import com.elekiwi.todobleta.core.data.repository.FakeAndroidTodoRepository
 import com.elekiwi.todobleta.core.domain.repository.TodoRepository
 import com.elekiwi.todobleta.todo_list.domain.use_case.DeleteTodo
 import com.elekiwi.todobleta.todo_list.domain.use_case.GetAllTodos
+import com.elekiwi.todobleta.todo_list.domain.use_case.UpdateTodo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,6 +42,12 @@ object TestAppModule {
     @Singleton
     fun provideDeleteTodoUseCase(todoRepository: TodoRepository): DeleteTodo {
         return DeleteTodo(todoRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpdaTodoUseCase(todoRepository: TodoRepository): UpdateTodo {
+        return UpdateTodo(todoRepository)
     }
 
 
