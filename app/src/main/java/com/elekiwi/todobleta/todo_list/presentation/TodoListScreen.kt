@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -182,6 +183,7 @@ private fun TodoListItem(
             )
             .padding(8.dp)
             .clickable { onEditClick(todoItem.id) }
+
     ) {
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -226,12 +228,15 @@ private fun TodoListItem(
                 onCheckedChange = { onCheckedChange() })
         }
 
+
         Icon(
             modifier = Modifier
-                .clickable { onDelete() },
+                .clickable { onDelete() }
+                .size(24.dp)
+                .background(Color.Yellow),
             imageVector = Icons.Default.Clear,
             contentDescription = TestTags.DELETE_TODO + todoItem.title,
-            tint = Color.Black,
+            tint = MaterialTheme.colorScheme.primary,
         )
     }
 }

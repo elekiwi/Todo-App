@@ -74,7 +74,7 @@ class AddTodoViewModel @Inject constructor(
 
             todo.let {
                 _addTodoState.update {
-                    it.copy(title = todo!!.title, description = todo.description, isDone = todo.isDone)
+                    it.copy(todoId = todo!!.id, title = todo.title, description = todo.description, isDone = todo.isDone)
                 }
             }
 
