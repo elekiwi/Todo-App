@@ -1,12 +1,13 @@
 package com.elekiwi.todobleta.todo_list.presentation
 
-import android.util.Log
+
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -23,10 +24,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -162,7 +165,6 @@ private fun ScaffoldView(
         }
     }
 }
-
 @Composable
 private fun TodoListItem(
     onDelete: () -> Unit,
@@ -171,7 +173,7 @@ private fun TodoListItem(
     todoItem: TodoItem,
     modifier: Modifier = Modifier
 ) {
-    Row(
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .height(150.dp)
@@ -181,27 +183,18 @@ private fun TodoListItem(
                 BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
                 RoundedCornerShape(20.dp)
             )
-            .padding(8.dp)
             .clickable { onEditClick(todoItem.id) }
-
+            .padding(8.dp)
     ) {
-
-        Spacer(modifier = Modifier.width(16.dp))
-
         Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp), verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .fillMaxSize()
         ) {
-
-
             Column(
                 modifier = Modifier
-                    .fillMaxHeight()
                     .weight(1f)
-                    .padding(vertical = 8.dp)
+                    .padding(vertical = 8.dp, horizontal = 8.dp)
             ) {
-
                 Text(
                     text = todoItem.title,
                     color = Color.Black,
@@ -220,23 +213,30 @@ private fun TodoListItem(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
-
             }
 
-            Checkbox(
-                checked = todoItem.isDone,
-                onCheckedChange = { onCheckedChange() })
+            Box(
+                modifier = Modifier
+                    .size(150.dp)
+                    .padding(8.dp),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                Checkbox(
+                    checked = todoItem.isDone,
+                    onCheckedChange = { onCheckedChange() }
+                )
+            }
         }
-
 
         Icon(
             modifier = Modifier
+                .align(Alignment.TopEnd)
                 .clickable { onDelete() }
-                .size(24.dp)
-                .background(Color.Yellow),
-            imageVector = Icons.Default.Clear,
-            contentDescription = TestTags.DELETE_TODO + todoItem.title,
-            tint = MaterialTheme.colorScheme.primary,
+                .padding(8.dp)
+                .size(24.dp),
+            imageVector = Icons.Default.Close,
+            contentDescription = "Delete ${todoItem.title}",
+            tint = Color.Black,
         )
     }
 }
