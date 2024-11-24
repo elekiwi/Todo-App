@@ -5,7 +5,7 @@ TodoApp is a task management application that allows users to create, update, de
 ## Functionalities
 
 * Create new tasks
-* Update existing tasks as new
+* Update existing tasks
 * Delete tasks
 * Mark tasks as completed
 
